@@ -65,4 +65,4 @@ Run `pnpm test` to execute the unit tests via [Karma](https://karma-runner.githu
 
 ###
 
-`*` Show post detail with all releted comments
+`*` Show post detail with all related comments
