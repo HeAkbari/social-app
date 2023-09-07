@@ -1,0 +1,25 @@
+// scss-docs-start color-variables
+$blue: #5d9cec;
+$indigo: #ac92ec;
+$purple: #967adc;
+$pink: #ec87c0;
+$red: #ed5565;
+$orange: #fc6e51;
+$yellow: #ffd064;
+$green: #4bc271;
+$teal: #4fc1e9;
+$cyan: #48cfad;
+// scss-docs-end color-variables
+
+$gray-100: #fcfdfe;
+$gray-400: #e8eaef;
+$gray-500: #b5b5c3;
+$gray-600: #7e8299;
+$light: #f2f3f7;
+
+// Create your own map
+$custom-colors: (
+  // "base": #ec0a51,
+  "master": #790161,
+  "base": #0ebe7e
+);

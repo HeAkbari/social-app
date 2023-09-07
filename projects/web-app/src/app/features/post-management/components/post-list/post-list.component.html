@@ -1,0 +1,10 @@
+<div  class="bg-scheme rounded-4 shadow-sm p-3 border mb-3">
+  <post></post>
+</div>
+<ng-container *ngIf="posts$ | async as postItems">
+  <post-item
+    *ngFor="let item of postItems;"
+    class="bg-scheme rounded rounded-4 mb-2 shadow-sm border d-block p-3"
+    [item]="item"
+  ></post-item>
+</ng-container>

@@ -1,0 +1,27 @@
+<ul class="d-flex flex-column justify-content-around m-0 p-0 sidemenu">
+  <li class="sidemenu-item bottom-menu-item">
+    <a
+      class="sidemenu-item-link d-flex align-items-center gap-2"
+      [routerLink]="routingPath.Post"
+    >
+      <svg-icon iconName="home-2"></svg-icon>
+      <span class="sidemenu-item-title">Post</span>
+    </a>
+  </li>
+
+  <li class="sidemenu-item">
+    <a
+      class="sidemenu-item-link d-flex align-items-center gap-2"
+      [routerLink]="routingPath.About"
+    >
+      <svg-icon iconName="flag"></svg-icon>
+      <span class="sidemenu-item-title">About</span>
+    </a>
+  </li>
+</ul>
+<div class="version text-center p-2 text-secondary d-lg-none mt-4 ss01">
+  {{ environment.build }}
+  <div class="text-center text-secondary">
+    {{ environment?.env }}
+  </div>
+</div>

@@ -1,0 +1,19 @@
+stages:
+  - build
+  - release
+  - deploy
+variables:
+  TAG: v${CI_PIPELINE_IID}
+  PROD_NAMESPACE: prod
+  DEV_NAMESPACE: stage
+  FF_ENABLE_JOB_CLEANUP: "true"
+
+  stage: deploy
+  when: manual
+  needs: ["build_prod_image"]
+  variables:
+    DEPLOYMENT_FILE1: "social-app.yml"
+    GIT_STRATEGY: none # avoid clone
+    REPO_DIR: ${PROD_NAMESPACE}
+  tags:
+    - TradingSystem-Builder

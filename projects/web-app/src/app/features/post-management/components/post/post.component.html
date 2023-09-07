@@ -1,0 +1,62 @@
+<div>
+  <form [formGroup]="postForm" (submit)="submit()" class="d-flex gap-2">
+    <img
+      src="../../../../../assets/img/images.png"
+      class="rounded-circle"
+      style="width: 48px; height: 48px"
+    />
+
+    <div
+      class="rounded-3 bg-body-secondary flex-grow-1 d-flex flex-column justify-content-between px-3 py-2 gap-2"
+    >
+      <div class="d-flex flex-lg-row flex-sm-column">
+        <label
+          class="align-items-center d-flex text-secondary"
+          [ngClass]="{ 'text-danger': isFieldInValid('userId') }"
+        >
+          userId:
+          <input
+            class="bg-transparent border-0"
+            id="userId"
+            formControlName="userId"
+            numbersOnly
+            autocomplete="off"
+          />
+        </label>
+        <label
+          class="align-items-center d-flex text-secondary"
+          [ngClass]="{ 'text-danger': isFieldInValid('title') }"
+        >
+          title:
+          <input
+            class="bg-transparent border-0"
+            id="title"
+            formControlName="title"
+            autocomplete="off"
+          />
+        </label>
+      </div>
+      <div>
+        <label class="d-flex text-secondary w-100"
+        [ngClass]="{ 'text-danger': isFieldInValid('body') }"
+        >
+          body:
+          <input
+            class="bg-transparent border-0 w-100"
+            id="body"
+            formControlName="body"
+            autocomplete="off"
+          />
+        </label>
+      </div>
+    </div>
+    <div class="d-flex gap-1 text-body-secondary">
+      <button
+        class="btn btn-sm btn-success"
+        [ngClass]="{ disabled: postForm.invalid }"
+      >
+        send
+      </button>
+    </div>
+  </form>
+</div>

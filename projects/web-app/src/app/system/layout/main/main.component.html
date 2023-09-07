@@ -1,0 +1,22 @@
+<div class="row g-0 h-100 overflow-hidden">
+  <div
+    class="bg-scheme d-lg-block col-3 col-xl-2 h-100 overflow-hidden border-end"
+  >
+    <left-sidebar
+      class="d-block d-flex flex-column h-100 overflow-hidden"
+    ></left-sidebar>
+  </div>
+  <div class="col h-100 overflow-hidden d-flex flex-column">
+    <header
+      class="header position-relative bg-scheme border-bottom px-3 d-flex justify-content-between flex-shrink-0 gap-3"
+    ></header>
+
+    <div class="h-100 overflow-hidden py-2 py-md-3 position-relative">
+      <loader-component
+        *ngIf="loadingService.loading$ | async"
+        class="loader-component position-absolute align-items-center bg-body bg-opacity-50 d-flex h-100 justify-content-center w-100 gap-1 fs-6 z-3"
+      ></loader-component>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="d-flex gap-2 mb-1">
+  <img
+    src="../../../../../assets/img/images.png"
+    class="rounded-circle"
+    style="width: 36px; height: 36px"
+  />
+  <div
+    class="rounded-pill bg-body-secondary flex-grow-1 d-flex align-items-center justify-content-between px-3 gap-2"
+  >
+    <input
+      class="bg-transparent border-0 w-100"
+      placeholder="send your comment..."
+      [(ngModel)]="content"
+      [maxLength]="200"
+      autocomplete="off"
+    />
+    <div class="d-flex gap-1 text-body-secondary">
+      <button disabled type="submit" class="btn btn-link btn-sm">send</button>
+    </div>
+  </div>
+</div>

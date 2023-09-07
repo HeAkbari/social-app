@@ -1,0 +1,8 @@
+<div
+  *ngIf="post$ | async as post"
+  class="bg-scheme rounded rounded-4 mb-2 mx-3 shadow-sm border d-block p-3"
+>
+  <post-item [item]="post" [haseDetail]="false"></post-item>
+  <comment [postId]="id" class="border-top d-block mt-3 py-3"></comment>
+  <comment-list [postId]="id"></comment-list>
+</div>
