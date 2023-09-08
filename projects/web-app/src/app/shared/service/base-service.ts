@@ -12,14 +12,11 @@ import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 })
 export class BaseService {
   protected apiService: ApiService;
-  protected httpClient: HttpClient;
   protected loadingService: LoadingService;
 
   constructor() {
     this.apiService = inject(ApiService);
     this.loadingService = inject(LoadingService);
-    this.httpClient = inject(HttpClient);
   }
 
 }
-export type Routing = keyof typeof RoutingPath;

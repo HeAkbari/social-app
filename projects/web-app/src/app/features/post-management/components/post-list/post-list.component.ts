@@ -28,7 +28,6 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe();
-    this.posts$.subscribe(console.log)
   }
 
   trackByPost(index: any, item: Post) {
