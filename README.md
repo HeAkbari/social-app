@@ -53,7 +53,7 @@ Run `pnpm test` to execute the unit tests via [Karma](https://karma-runner.githu
 
 ## Features implemented
 
-`*` Show all posts with scrolling pagination
+`*` Show all posts with infinite scroll pagination
 
 ###
 
@@ -61,8 +61,8 @@ Run `pnpm test` to execute the unit tests via [Karma](https://karma-runner.githu
 
 ###
 
-`*` Remove an specific post
+`*` Remove a specific post
 
 ###
 
-`*` Show post detail with all related comments
+`*` Show post details with all related comments
