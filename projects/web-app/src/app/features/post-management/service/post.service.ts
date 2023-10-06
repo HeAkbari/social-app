@@ -15,14 +15,14 @@ import { BaseService } from "../../../shared/service/base-service";
 import { endpoints } from "../../../system/endpoints";
 import { Post, PostRequest } from "../model/post.model";
 import { Store } from "@ngrx/store";
-import { postAction } from "../store/post.actions";
-import { PostSelector } from "../model/selector.model";
+import { postAction } from "../../../store/actions/post.actions";
+import { StoreSelector } from "../../../store/reducers/reducer";
 
 @Injectable({
   providedIn: "root",
 })
 export class PostService extends BaseService {
-  constructor(private store: Store<PostSelector>) {
+  constructor(private store: Store<StoreSelector>) {
     super();
   }
   pagination = {
@@ -51,7 +51,7 @@ export class PostService extends BaseService {
     return this.apiService.get<Post[]>(endpoints.posts, params).pipe(
       tap((posts) => {
         this.pagination.lastItemcount += posts.length;
-        this.store.dispatch(postAction.listPost({ posts }));
+        this.store.dispatch(postAction.updates({ posts }));
       }),
       catchError((error) => throwError(() => error))
     );
@@ -59,7 +59,7 @@ export class PostService extends BaseService {
   getPost(id: number) {
     return this.apiService.get<Post>(`${endpoints.posts}/${id}`).pipe(
       tap((post) => {
-        // this.store.dispatch(postAction.listPost({ posts: [post] }));
+        this.store.dispatch(postAction.updates({ posts: [post] }));
       }),
       catchError((error) => throwError(() => error))
     );
@@ -67,7 +67,7 @@ export class PostService extends BaseService {
   createPost(post: PostRequest) {
     return this.apiService.post(endpoints.posts, post).pipe(
       tap((post) => {
-        this.store.dispatch(postAction.createPost({ post }));
+        this.store.dispatch(postAction.create({ post }));
       }),
       catchError((error) => throwError(() => error))
     );
@@ -75,7 +75,7 @@ export class PostService extends BaseService {
   deletePost(id: number) {
     return this.apiService.delete(`${endpoints.posts}/${id}`).pipe(
       tap(() => {
-        this.store.dispatch(postAction.deletePost({ id }));
+        this.store.dispatch(postAction.delete({ id }));
       }),
       catchError((error) => throwError(() => error))
     );

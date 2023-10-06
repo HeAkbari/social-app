@@ -1,16 +1,16 @@
 import { createReducer, on } from "@ngrx/store";
-import { postAction } from "./post.actions";
-import { Post } from "../model/post.model";
+import { postAction } from "../actions/post.actions";
+import { Post } from "../../features/post-management/model/post.model";
 
-export const initialState: Post[] = [];
+export const initialState: ReadonlyArray<Post> = [];
 
 export const PostReducer = createReducer(
   initialState,
-  on(postAction.listPost, (state, { posts }) => [...state, ...posts]),
-  on(postAction.createPost, (state, { post }) => {
+  on(postAction.updates, (state, { posts }) => [...state, ...posts]),
+  on(postAction.create, (state, { post }) => {
     return [post, ...state];
   }),
-  on(postAction.updatePost, (state, { post }) => {
+  on(postAction.update, (state, { post }) => {
     const i = state.findIndex((t) => t.id === post.id);
     if (i >= 0)
       return [
@@ -19,7 +19,7 @@ export const PostReducer = createReducer(
       ];
     return [post, ...state];
   }),
-  on(postAction.deletePost, (state, { id }) => {
+  on(postAction.delete, (state, { id }) => {
     return state.filter((t) => t.id != id);
   })
 );

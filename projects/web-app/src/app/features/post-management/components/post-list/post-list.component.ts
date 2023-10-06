@@ -7,7 +7,7 @@ import { Post } from "../../model/post.model";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { PostItemComponent } from "../post-item/post-item.component";
-import { PostSelector } from "../../model/selector.model";
+import { StoreSelector } from "projects/web-app/src/app/store/reducers/reducer";
 
 @Component({
   selector: "post-list",
@@ -16,15 +16,14 @@ import { PostSelector } from "../../model/selector.model";
   standalone: true,
   imports: [CommonModule, PostComponent, PostItemComponent],
 })
-export class PostListComponent implements OnInit, OnDestroy {
+export class PostListComponent implements OnInit {
   posts$: Observable<Post[]>;
   constructor(
     public postService: PostService,
-    private store: Store<PostSelector>
+    private store: Store<StoreSelector>
   ) {
-    this.posts$ = this.store.select("posts");
+    this.posts$ = this.store.select(state=>state.posts);
   }
-  ngOnDestroy(): void {}
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe();

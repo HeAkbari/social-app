@@ -18,7 +18,7 @@ import { SWService } from "./shared/service/sw.service";
 import { CommonModule } from "@angular/common";
 import { ApiInterceptor } from "./core/interceptor/api.interceptor";
 import { StoreModule } from "@ngrx/store";
-import { storesReducer } from "./stores.reducer";
+import { storesReducer } from "./store/reducers/reducer";
 
 @NgModule({
   declarations: [AppComponent],

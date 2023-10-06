@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CommentItemComponent } from "../comment-item/comment-item.component";
 import { CommentService } from "../../service/comment.service";
-import { PostSelector } from "../../model/selector.model";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs/internal/Observable";
 import { Comment } from "../../model/comment.model";
+import { StoreSelector } from "../../../../store/reducers/reducer";
 
 @Component({
   selector: "comment-list",
@@ -20,15 +20,15 @@ export class CommentListComponent implements OnInit {
   comments$: Observable<Comment[]>;
   constructor(
     public commentService: CommentService,
-    private store: Store<PostSelector>
+    private store: Store<StoreSelector>
   ) {
-    this.comments$ = this.store.select("comments");
+    this.comments$ = this.store.select((state) => state.comments);
   }
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
     this.commentService.getComments(this.postId).subscribe();
-    this.comments$.subscribe(console.log)
+    this.comments$.subscribe(console.log);
   }
 
   trackBy(index: any, item: Comment) {
