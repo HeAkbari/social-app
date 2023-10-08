@@ -15,14 +15,13 @@ import { BaseService } from "../../../shared/service/base-service";
 import { endpoints } from "../../../system/endpoints";
 import { Post, PostRequest } from "../model/post.model";
 import { Store } from "@ngrx/store";
-import { postAction } from "../../../store/actions/post.actions";
-import { StoreSelector } from "../../../store/reducers/reducer";
+import { postAction } from "../../../state/posts/post.actions";
 
 @Injectable({
   providedIn: "root",
 })
 export class PostService extends BaseService {
-  constructor(private store: Store<StoreSelector>) {
+  constructor(private store: Store) {
     super();
   }
   pagination = {
@@ -39,7 +38,13 @@ export class PostService extends BaseService {
     )
       return;
     this.pagination.offset = this.pagination.offset + this.pagination.pageSize;
-    return this.getPosts().subscribe();
+    return this.getPosts()
+      .pipe(
+        tap((posts) => {
+          this.store.dispatch(postAction.updates({ posts }));
+        })
+      )
+      .subscribe();
   }
   getPosts() {
     const params = new HttpParams({
@@ -51,7 +56,6 @@ export class PostService extends BaseService {
     return this.apiService.get<Post[]>(endpoints.posts, params).pipe(
       tap((posts) => {
         this.pagination.lastItemcount += posts.length;
-        this.store.dispatch(postAction.updates({ posts }));
       }),
       catchError((error) => throwError(() => error))
     );
@@ -67,7 +71,7 @@ export class PostService extends BaseService {
   createPost(post: PostRequest) {
     return this.apiService.post(endpoints.posts, post).pipe(
       tap((post) => {
-        this.store.dispatch(postAction.create({ post }));
+        this.store.dispatch(postAction.creating({ post }));
       }),
       catchError((error) => throwError(() => error))
     );

@@ -18,8 +18,9 @@ import { SWService } from "./shared/service/sw.service";
 import { CommonModule } from "@angular/common";
 import { ApiInterceptor } from "./core/interceptor/api.interceptor";
 import { StoreModule } from "@ngrx/store";
-import { storesReducer } from "./store/reducers/reducer";
-
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from "./state/posts/post.effects";
+import { reducers } from "./state/reducer";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -36,7 +37,8 @@ import { storesReducer } from "./store/reducers/reducer";
       enabled: !isDevMode(),
       registrationStrategy: "registerWhenStable:30000",
     }),
-    StoreModule.forRoot(storesReducer),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(PostEffects)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

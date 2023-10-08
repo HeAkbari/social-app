@@ -5,15 +5,14 @@ import { catchError, tap, throwError } from "rxjs";
 import { BaseService } from "../../../shared/service/base-service";
 import { endpoints } from "../../../system/endpoints";
 import { Store } from "@ngrx/store";
-import { commentAction } from "../../../store/actions/comment.actions";
+import { commentAction } from "../../../state/comments/comment.actions";
 import { Comment } from "../model/comment.model";
-import { StoreSelector } from "../../../store/reducers/reducer";
 
 @Injectable({
   providedIn: "root",
 })
 export class CommentService extends BaseService {
-  constructor(private store: Store<StoreSelector>) {
+  constructor(private store: Store) {
     super();
   }
   getComments(postId: number) {

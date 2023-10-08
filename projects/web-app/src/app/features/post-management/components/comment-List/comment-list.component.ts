@@ -5,7 +5,11 @@ import { CommentService } from "../../service/comment.service";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs/internal/Observable";
 import { Comment } from "../../model/comment.model";
-import { StoreSelector } from "../../../../store/reducers/reducer";
+import {
+  AppState,
+  CommentState,
+} from "projects/web-app/src/app/state/app.state";
+import * as reducer from "projects/web-app/src/app/state/comments/comment.reducer";
 
 @Component({
   selector: "comment-list",
@@ -20,9 +24,9 @@ export class CommentListComponent implements OnInit {
   comments$: Observable<Comment[]>;
   constructor(
     public commentService: CommentService,
-    private store: Store<StoreSelector>
+    private store: Store<AppState>
   ) {
-    this.comments$ = this.store.select((state) => state.comments);
+    this.comments$ = this.store.select(reducer.getComments);
   }
   ngOnDestroy(): void {}
 
